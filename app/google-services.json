@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "87332448220",
+    "project_id": "surat-bebas-pinjam",
+    "storage_bucket": "surat-bebas-pinjam.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:87332448220:android:32513ffba3ee3788c7d119",
+        "android_client_info": {
+          "package_name": "com.example.suratbebaspinjam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "87332448220-vce89hrjhqspco29td9skeur89jjk465.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.suratbebaspinjam",
+            "certificate_hash": "0750c04ca8251159ef495cb6d85903f751784af5"
+          }
+        },
+        {
+          "client_id": "87332448220-m47lqp6guum70r9vir34ie1d26t2c0iu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfpL_YvrULEONQlkresyYg-fU-TWhEnak"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "87332448220-m47lqp6guum70r9vir34ie1d26t2c0iu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
