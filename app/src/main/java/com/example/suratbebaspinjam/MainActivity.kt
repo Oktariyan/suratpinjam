@@ -1,13 +1,14 @@
 package com.example.suratbebaspinjam
 
+import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.webkit.WebSettings
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.webkit.*
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.google.firebase.auth.FirebaseAuth
@@ -19,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var webView: WebView
     private lateinit var auth: FirebaseAuth
+    private var fileChooserCallback: ValueCallback<Array<Uri>>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,15 +33,51 @@ class MainActivity : AppCompatActivity() {
         webView = findViewById(R.id.webView)
         setupWebView()
 
-        // Load URL
-        webView.loadUrl("https://forms.gle/m1TXrXu1rkAmcaxf6")
+        // Load URL Google Forms
+        webView.loadUrl("https://docs.google.com/forms/d/e/1FAIpQLSdnSmy0ITtvVBySmcTSXPRy3AwU9Zo8iwlRKMrPi4EsUz8mDA/viewform")
     }
 
     private fun setupWebView() {
         val webSettings: WebSettings = webView.settings
         webSettings.javaScriptEnabled = true
-        webView.webViewClient = WebViewClient() // Agar tetap di dalam WebView
+        webSettings.allowFileAccess = true
+        webSettings.allowContentAccess = true
+
+        webView.webViewClient = WebViewClient()
+
+        // Tangani input file dari WebView
+        webView.webChromeClient = object : WebChromeClient() {
+            override fun onShowFileChooser(
+                webView: WebView?,
+                filePathCallback: ValueCallback<Array<Uri>>?,
+                fileChooserParams: FileChooserParams?
+            ): Boolean {
+                fileChooserCallback = filePathCallback
+                openGallery()
+                return true
+            }
+        }
     }
+
+    // Fungsi untuk membuka galeri
+    private fun openGallery() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        launcher.launch(intent)
+    }
+
+    // Handler untuk menangkap hasil dari galeri
+    private val launcher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK && result.data != null) {
+                val uri = result.data!!.data
+                fileChooserCallback?.onReceiveValue(arrayOf(uri!!))
+                fileChooserCallback = null
+            } else {
+                fileChooserCallback?.onReceiveValue(null)
+                fileChooserCallback = null
+            }
+        }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
