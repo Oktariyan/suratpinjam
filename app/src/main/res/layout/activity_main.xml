@@ -9,7 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:background="#2196F3">
+        android:background="#2196F3"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
         <ImageView
             android:layout_width="50dp"
@@ -19,7 +21,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
             android:paddingStart="8dp"
             android:text="FORM SURAT BEBAS PINJAM"
             android:textColor="#FFFFFF"
@@ -27,24 +28,23 @@
             android:textStyle="bold" />
     </LinearLayout>
 
+    <!-- Tombol untuk membuka Google Forms dengan Chrome Custom Tabs -->
+    <Button
+        android:id="@+id/btnOpenForm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Buka Formulir"
+        android:layout_margin="16dp"
+        android:backgroundTint="#2196F3"
+        android:textColor="#FFFFFF" />
 
-
-    <!-- Main Content -->
-    <LinearLayout
+    <!-- WebView (Opsional, Bisa Digunakan Jika Ingin Membuka Form di Aplikasi) -->
+    <WebView
+        android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:padding="16dp">
-
-        <!-- WebView for Google Form -->
-        <WebView
-            android:id="@+id/webView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="0dp" />
-    </LinearLayout>
+        android:visibility="gone" />
 
     <!-- Footer -->
     <LinearLayout
@@ -52,7 +52,8 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:background="#2196F3"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center">
 
         <TextView
             android:layout_width="wrap_content"
@@ -72,4 +73,5 @@
             android:text="Social Media: @fst_unair"
             android:textColor="#FFFFFF"/>
     </LinearLayout>
+
 </LinearLayout>
